@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+<script type="text/babel" />
+<script>
+    import PropTypes from "prop-types";
+
+    // function Btn(props)로 받아도 됨
+    function Btn({ banana, big, onClick }){
+        return <button
+            style={{
+                backgroundColor: "blue",
+                color: "white",
+                padding: "10px 20px",
+                borderRadius: "5px",
+                border: "none",
+                fontSize: big ? "20px" : "10px"
+            }}
+            onClick={onClick}
+        >{banana}</button>
+    }
+    Btn.propTypes = {
+        banana: PropTypes.string.isRequired,
+        big: PropTypes.bool,
+        onClick: PropTypes.func
+    }
+
+    const MemorizedBtn = React.memo(Btn); // React.memo를 사용하면 props가 바뀌지 않는 한 re-rendering을 하지 않는다. Btn의 memorize 버젼을 생성한 것.
+    function App(){
+        const [text, setText] = React.useState("Save Changes");
+        // const onSelect = (event) => {
+        //     setIndex(event.target.value);
+        // }
+
+        const changeText = () => {
+            setText("Revert Changes");
+        }
+        return (
+            <div >
+                <MemorizedBtn onClick={changeText} text={text} big={true}/> // 여기서 작성한 onClick은 props의 하나일 뿐이지 eventListener가 아니다.
+                <MemorizedBtn text="Continue"/> // big = undefined
+            </div>
+        );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, document.getElementById("root"));
+</script>
+</html>

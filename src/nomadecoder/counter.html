@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel"></script>
+<script>
+    const root = document.getElementById("root");
+    // function Title() {
+    //     return <h3 id="title" onMouseEnter={()=> console.log("mouse enter")}>Hello I'm a title</h3>
+    // }
+    // const Button = () =>  (
+    //     <button
+    //         style={{backgroundColor: "tomato"}}
+    //         onClick={()=>console.log("im clicked")}
+    //     >
+    //         Click me
+    //     </button>
+    // );
+    // const h3 = React.createElement("h3", {
+    //     onMouseEnter: () => {
+    //         console.log("I have been hovered");
+    //     }
+    // }, "Total clicks: 0");
+
+    // const button = React.createElement("button", {
+    //     onClick: () => {
+    //         console.log("I have been clicked");
+    //     },
+    //     style: {
+    //         backgroundColor : "red"
+    //     }
+    // }, "Click me");
+
+    // const container = React.createElement("div", null, [Title, Button]);
+
+
+    // let counter = 0;
+    // function countUp(){
+    //     counter++;
+    //     console.log(counter);
+    //     render();
+    // }
+    // function render(){
+    //     ReactDOM.render(<Container />, root);
+    // }
+
+    // const data = React.useState(0); // [undefined, f] --> [data, function], 0을 기본 값으로 넣으면 [0, f]가 됨
+
+    const [counter, setCounter] = React.useState(0);
+    const onClick = () => {
+        // setCounter(counter + 1) // rendering까지 해주기떄문에 우리가 직접 코드 작성할 필요 없음.
+        setCounter((current) => current+1); // 더 안전한 방법
+        console.log(counter);
+    }
+    const Container = <div>
+        <h3>Total clicks: {counter}</h3>
+        <buttonn onClick={onClick}>Click me</buttonn>
+    </div>
+    ReactDOM.render(<Container />, root);ㄹ
+</script>
+</html>
